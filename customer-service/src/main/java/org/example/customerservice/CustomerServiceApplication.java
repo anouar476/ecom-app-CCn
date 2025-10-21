@@ -4,10 +4,12 @@ import org.example.customerservice.repository.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.example.customerservice.entities.Customer;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class CustomerServiceApplication {
 
     public static void main(String[] args) {

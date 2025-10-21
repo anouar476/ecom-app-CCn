@@ -1,16 +1,32 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    config:
+      enabled: false
+    discovery:
+      enabled: true
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: false
+      routes:
+        - id: customers-static
+          uri: lb://CUSTOMER-SERVICE
+          predicates:
+            - Path=/api/customers/**
+        - id: products-static
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/products/**
+
 server:
   port: 8888
 
-spring:
-  cloud:
-    gateway:
-      mvc:
-        routes:
-          - id: r1
-            uri: lb://CUSTOMER-SERVICE
-            predicates:
-              - Path=/api/customers/**
-          - id: r2
-            uri: lb://PRODUCT-SERVICE
-            predicates:
-              - Path=/api/products/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
